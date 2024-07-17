@@ -1,0 +1,14 @@
+[package]
+name = "dedup_csv"
+version = "0.1.0"
+edition = "2021"
+authors = ["kingsley.hendrickse <kingsley.hendrickse@patchwork.health>"]
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+magnus = { version = "0.7.1" }
+csv = "1.3.0"
+eyre = "0.6.12"
