@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'dedup_csv'
+require 'csv'
+require 'fileutils'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

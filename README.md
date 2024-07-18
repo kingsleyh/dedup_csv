@@ -11,7 +11,7 @@ gem install dedup_csv
 ## Usage
 
 ```irb
-require 'dedup_csv/3.2/dedup_csv'
+require 'dedup_csv'
 DedupCsv.dedup('file1.csv', 'file2.csv', 'output.csv')
 ```
 
