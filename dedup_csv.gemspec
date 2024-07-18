@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
-require_relative "lib/dedup_csv/version"
+require_relative 'lib/dedup_csv/version'
 
 Gem::Specification.new do |spec|
-  spec.name = "dedup_csv"
+  spec.name = 'dedup_csv'
   spec.version = DedupCsv::VERSION
-  spec.authors = ["kingsley.hendrickse"]
-  spec.email = ["kingsley.hendrickse@patchwork.health"]
+  spec.authors = ['kingsley.hendrickse']
+  spec.email = ['kingsley.hendrickse@patchwork.health']
 
-  spec.summary = "Fast CSV deduplicator"
-  spec.description = "Given 2 csv files of the same shape will find a delta"
-  spec.homepage = "http://github.com"
-  spec.required_ruby_version = ">= 2.6.0"
-  spec.required_rubygems_version = ">= 3.3.11"
+  spec.summary = 'Fast CSV deduplicator'
+  spec.description = 'Given 2 csv files of the same shape will find a delta'
+  spec.homepage = 'http://github.com'
+  spec.required_ruby_version = '>= 2.6.0'
+  spec.required_rubygems_version = '>= 3.3.11'
 
   # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
-  spec.metadata["homepage_uri"] = spec.homepage
+  spec.metadata['homepage_uri'] = spec.homepage
   # spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
   # spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
 
@@ -27,10 +27,10 @@ Gem::Specification.new do |spec|
       (File.expand_path(f) == __FILE__) || f.start_with?(*%w[bin/ test/ spec/ features/ .git .circleci appveyor])
     end
   end
-  spec.bindir = "exe"
+  spec.bindir = 'exe'
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
-  spec.extensions = ["ext/dedup_csv/Cargo.toml"]
+  spec.require_paths = ['lib']
+  spec.extensions = ['ext/dedup_csv/Cargo.toml']
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
