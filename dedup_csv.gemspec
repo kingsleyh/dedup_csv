@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email = ['kingsley.hendrickse@patchwork.health']
 
   spec.summary = 'Fast CSV deduplicator'
-  spec.description = 'Given 2 csv files of the same shape will find a delta'
+  spec.description = 'Given 2 CSV files, remove all rows from the second CSV that are present in the first CSV.'
   spec.homepage = 'http://github.com/kingsleyh/dedup_csv'
   spec.required_ruby_version = '>= 2.6.0'
   spec.required_rubygems_version = '>= 3.0.0'
