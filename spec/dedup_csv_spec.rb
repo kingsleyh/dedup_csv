@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'csv'
+require 'fileutils'
 
 RSpec.describe DedupCsv do
   let(:path) { 'spec/tmp' }
