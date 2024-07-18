@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary = 'Fast CSV deduplicator'
   spec.description = 'Given 2 CSV files, remove all rows from the second CSV that are present in the first CSV.'
   spec.homepage = 'http://github.com/kingsleyh/dedup_csv'
-  spec.required_ruby_version = '>= 2.6.0'
+  spec.required_ruby_version = '>= 2.7.8'
   spec.required_rubygems_version = '>= 3.1.6'
 
   spec.metadata['homepage_uri'] = spec.homepage
