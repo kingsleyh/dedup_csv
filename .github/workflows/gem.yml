@@ -39,6 +39,7 @@ jobs:
         with:
           platform: ${{ matrix.platform }}
           ruby-versions: "2.7"
+          rubygems: 3.1.6
 
       - uses: actions/download-artifact@v3
         with:
