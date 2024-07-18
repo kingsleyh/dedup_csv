@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     dedup_csv (0.1.11)
+      rb_sys (~> 0.9)
 
 GEM
   remote: https://rubygems.org/
