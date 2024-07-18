@@ -13,6 +13,13 @@ require 'rb_sys/extensiontask'
 
 task build: :compile
 
+spec = Bundler.load_gemspec('dedup_csv.gemspec')
+spec.requirements.clear
+spec.required_ruby_version = nil
+spec.required_rubygems_version = nil
+spec.extensions.clear
+spec.files -= Dir['ext/**/*']
+
 Rake::ExtensionTask.new('dedup_csv', spec) do |c|
   c.lib_dir = 'lib/dedup_csv'
   c.cross_compile = true
