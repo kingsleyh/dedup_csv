@@ -62,7 +62,7 @@ DEPENDENCIES
   dedup_csv!
   rake (~> 13.0)
   rake-compiler
-  rb_sys (~> 0.9.63)
+  rb_sys (~> 0.9.98)
   rspec (~> 3.0)
   rubocop (~> 1.21)
 
