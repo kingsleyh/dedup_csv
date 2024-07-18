@@ -9,7 +9,7 @@ RSpec.describe DedupCsv do
   let(:target_csv) { "#{path}/delta.csv" }
 
   before do
-    Dir.mkdir(path) unless Dir.exist?(path)
+    FileUtils.mkdir_p(path)
   end
 
   after(:all) do
