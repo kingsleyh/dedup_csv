@@ -3,7 +3,7 @@
 # load native extension
 begin
   ruby_version = /(\d+\.\d+)/.match(RUBY_VERSION)
-  require_relative "#{ruby_version}/dedup_csv"
+  require_relative "dedup_csv/#{ruby_version}/dedup_csv"
 rescue LoadError
   require_relative 'dedup_csv/dedup_csv'
 end
