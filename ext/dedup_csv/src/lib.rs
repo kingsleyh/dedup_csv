@@ -7,10 +7,10 @@ use magnus::{define_module, function, prelude::*, Ruby};
 
 fn dedup(ruby: &Ruby, previous_csv_path: String, new_csv_path: String, target_path: String) -> magnus::error::Result<()> {
     if !previous_csv_path.has_extension(&["csv"]) {
-        return Err(magnus::Error::new(ruby.exception_exception(), "previous_csv_path must be a csv file".to_string()));
+        return Err(magnus::Error::new(ruby.exception_standard_error(), "previous_csv_path must be a csv file".to_string()));
     }
     if !new_csv_path.has_extension(&["csv"]) {
-        return Err(magnus::Error::new(ruby.exception_exception(), "new_csv_path must be a csv file".to_string()));
+        return Err(magnus::Error::new(ruby.exception_standard_error(), "new_csv_path must be a csv file".to_string()));
     }
 
     let csv1 = File::open(previous_csv_path).map_err(|e| magnus_err(ruby, e, "previous_csv_path"))?;
@@ -25,7 +25,7 @@ fn dedup(ruby: &Ruby, previous_csv_path: String, new_csv_path: String, target_pa
     let new_headers = new_csv.headers().map_err(|e| magnus_err(ruby, e, "new_csv_path headers"))?;
 
     if previous_headers != new_headers {
-        return Err(magnus::Error::new(ruby.exception_exception(), "headers of both csv files must be the same".to_string()));
+        return Err(magnus::Error::new(ruby.exception_standard_error(), "headers of both csv files must be the same".to_string()));
     }
 
     wtr.write_byte_record(previous_headers.as_byte_record()).unwrap();
@@ -50,7 +50,7 @@ fn dedup(ruby: &Ruby, previous_csv_path: String, new_csv_path: String, target_pa
 }
 
 fn magnus_err<E: Error>(ruby: &Ruby, e: E, msg: &str) -> magnus::Error {
-    magnus::Error::new(ruby.exception_exception(), format!("{}: {}", msg, e.to_string()))
+    magnus::Error::new(ruby.exception_standard_error(), format!("{}: {}", msg, e.to_string()))
 }
 
 #[magnus::init]
