@@ -24,6 +24,9 @@ jobs:
           supported-ruby-platforms: |
             exclude:
               - x64-mingw32
+              - aarch64-linux-musl
+              - arm-linux
+              - x64-mingw-ucrt
   native_gem:
     name: Compile native gem
     runs-on: ubuntu-latest
