@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe DedupCsv do
   let(:path) { 'spec/tmp' }
   let(:previous_csv) { "#{path}/previous.csv" }
@@ -78,6 +79,30 @@ RSpec.describe DedupCsv do
     end
   end
 
+  context 'when a new csv file exists but has empty rows' do
+    before do
+      create_previous_csv
+      create_new_csv_with_empty_rows
+      DedupCsv.dedup(previous_csv, new_csv, target_csv)
+    end
+
+    it 'returns a file with the correct number of rows and skips empty rows' do
+      expect(File.foreach(target_csv).count).to eq(2)
+    end
+  end
+
+  context 'when a previous csv file exists but has empty rows' do
+    before do
+      create_previous_csv
+      create_previous_csv_with_empty_rows
+      DedupCsv.dedup(previous_csv, new_csv, target_csv)
+    end
+
+    it 'returns a file with the correct number of rows and skips empty rows' do
+      expect(File.foreach(target_csv).count).to eq(2)
+    end
+  end
+
   context 'where the headers do not match on existing files' do
     let(:new_csv) { "#{path}/bad_headers.csv" }
 
@@ -111,6 +136,28 @@ RSpec.describe DedupCsv do
     end
   end
 
+  def create_new_csv_with_empty_rows
+    CSV.open('spec/tmp/new_empty_rows.csv', 'w') do |csv|
+      csv << %w[id col1 col2]
+      csv << %w[3 g g]
+      csv << ['', '', '']
+      csv << %w[1 a b]
+      csv << ['', '', '']
+      csv << %w[2 c d]
+    end
+  end
+
+  def create_previous_csv_with_empty_rows
+    CSV.open('spec/tmp/previous_empty_rows.csv', 'w') do |csv|
+      csv << %w[id col1 col2]
+      csv << %w[1 a b]
+      csv << ['', '', '']
+      csv << %w[3 e f]
+      csv << ['', '', '']
+      csv << %w[2 c d]
+    end
+  end
+
   def create_new_csv_with_altered_header
     CSV.open('spec/tmp/bad_headers.csv', 'w') do |csv|
       csv << %w[ids sad mad]
@@ -120,3 +167,4 @@ RSpec.describe DedupCsv do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
