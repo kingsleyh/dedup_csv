@@ -91,6 +91,18 @@ RSpec.describe DedupCsv do
     end
   end
 
+  context 'when a new csv file exists but has extra carriage returns and new lines' do
+    before do
+      create_previous_csv
+      create_new_csv_with_nl_cr
+      DedupCsv.dedup(previous_csv, new_csv, target_csv)
+    end
+
+    it 'returns a file with the correct number of rows and removes extra new lines' do
+      expect(File.readlines(target_csv).count).to eq(2)
+    end
+  end
+
   context 'when a previous csv file exists but has empty rows' do
     before do
       create_previous_csv
@@ -164,6 +176,15 @@ RSpec.describe DedupCsv do
       csv << %w[1 a b]
       csv << %w[3 e f]
       csv << %w[2 c d]
+    end
+  end
+
+  def create_new_csv_with_nl_cr
+    CSV.open('spec/tmp/returns.csv', 'w') do |csv|
+      csv << %w[id col1 col2]
+      csv << [3, "g\n\n\r", 'g']
+      csv << [1, "a\n", 'b']
+      csv << [2, "c\r\n", 'd']
     end
   end
 end

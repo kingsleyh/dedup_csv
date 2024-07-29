@@ -33,13 +33,14 @@ fn dedup(ruby: &Ruby, previous_csv_path: String, new_csv_path: String, target_pa
     let mut previous_records = vec![];
     for previous_record in previous_csv.records() {
         let previous_record = previous_record.map_err(|e| magnus_err(ruby, e, "previous_record"))?;
+        let previous_record = previous_record.into_iter().map(|r| r.trim_end()).collect::<StringRecord>();
         previous_records.push(previous_record)
     }
 
     for new_record in new_csv.records() {
         let new_record = new_record.map_err(|e| magnus_err(ruby, e, "new_record"))?;
+        let new_record = new_record.into_iter().map(|r| r.trim_end()).collect::<StringRecord>();
         if !previous_records.contains(&new_record) {
-            let new_record = new_record.into_iter().map(|r| r.trim_end()).collect::<StringRecord>();
             wtr.write_byte_record(new_record.as_byte_record()).unwrap();
         }
     }
